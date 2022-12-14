@@ -20,12 +20,12 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-    with:
-        dotnet-version: 6.0.x
-      run: dotnet restore
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.1.1
+    - name: restore-nuget-packages
+      run: nuget.exe restore "src/PartsUnlimitedWebsite/packages.config" -PackagesDirectory "packages" -Source "https://api.nuget.org/v3/index.json" -NonInteractive
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet build "src/PartsUnlimitedWebsite/*.csproj" --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Upload a Build Artifact
