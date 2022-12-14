@@ -18,7 +18,7 @@ jobs:
       Configuration: Release
       SolutionPath: PartsUnlimited.sln
       UnitTestsPath: test/PartsUnlimited.UnitTests/PartsUnlimited.UnitTests.csproj
-      BuildPath: bin/
+      BuildPath: PartsUnlimite-E2E/src/PartsUnlimitedWebsite/bin/
 
     steps:
     - uses: actions/checkout@v3
