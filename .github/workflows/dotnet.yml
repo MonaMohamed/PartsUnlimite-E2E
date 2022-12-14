@@ -25,7 +25,7 @@ jobs:
     - name: restore-nuget-packages
       run: nuget.exe restore "src/PartsUnlimitedWebsite/packages.config" -PackagesDirectory "packages" -Source "https://api.nuget.org/v3/index.json" -NonInteractive
     - name: Build
-      run: dotnet build "src/PartsUnlimitedWebsite/*.csproj" --configuration Release
+      run: dotnet build --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Upload a Build Artifact
