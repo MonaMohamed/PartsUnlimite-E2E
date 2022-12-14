@@ -11,13 +11,13 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
     
     env: 
       VersionSuffix: 'pr-${{github.event.number}}.${{ github.run_number }}'
       Configuration: Release
       SolutionPath: PartsUnlimited.sln
+      UnitTestsPath: test/PartsUnlimited.UnitTests/PartsUnlimited.UnitTests.csproj
 
     steps:
     - uses: actions/checkout@v3
@@ -43,8 +43,8 @@ jobs:
       env: 
         DeployExtension: False
     
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Unit Test
+      run: dotnet test $env:UnitTestsPath --no-build --verbosity normal
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
