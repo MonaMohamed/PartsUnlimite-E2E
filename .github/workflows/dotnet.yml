@@ -13,21 +13,39 @@ jobs:
   build:
 
     runs-on: windows-latest
+    
+    env: 
+      VersionSuffix: 'pr-${{github.event.number}}.${{ github.run_number }}'
+      Configuration: Release
+      SolutionPath: PartsUnlimited.sln
 
     steps:
     - uses: actions/checkout@v3
+   
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+   
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+      with:
+        vs-version: '[16.8,16.9]'
+    
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
+    
     - name: restore-nuget-packages
-      run: nuget.exe restore "src/PartsUnlimitedWebsite/packages.config" -PackagesDirectory "packages" -Source "https://api.nuget.org/v3/index.json" -NonInteractive
-    - name: Build
-      run: dotnet build --configuration Release
+      run: nuget.exe restore $env:SolutionPath -NonInteractive
+    
+    - name: Build extension
+      run: msbuild $env:SolutionPath /t:Rebuild
+      env: 
+        DeployExtension: False
+    
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
