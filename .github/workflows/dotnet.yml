@@ -23,7 +23,7 @@ jobs:
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
     - name: restore-nuget-packages
-      uses: IT-Service/restore-nuget-packages@v1
+      run: nuget.exe restore "../src/PartsUnlimitedWebsite/packages.config" -PackagesDirectory "packages" -Source "https://api.nuget.org/v3/index.json" -NonInteractive
     - name: Build
       run: dotnet build --configuration Release
     - name: Test
