@@ -21,6 +21,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
+    with:
+        dotnet-version: 6.0.x
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
