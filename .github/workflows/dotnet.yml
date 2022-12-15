@@ -17,7 +17,7 @@ jobs:
       VersionSuffix: 'pr-${{github.event.number}}.${{ github.run_number }}'
       Configuration: Release
       SolutionPath: PartsUnlimited.sln
-      UnitTestsPath: test/PartsUnlimited.UnitTests/*.csproj
+      UnitTestsPath: test/PartsUnlimited.UnitTests/PartsUnlimited.UnitTests.csproj
 
     steps:
     - uses: actions/checkout@v3
