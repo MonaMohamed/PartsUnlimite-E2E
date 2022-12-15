@@ -44,7 +44,7 @@ jobs:
         DeployExtension: False
     
     - name: Unit Test
-      run: dotnet test --list-tests $env:UnitTestsPath
+      run: dotnet test --logger:"console;verbosity=normal" $env:UnitTestsPath
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
