@@ -54,7 +54,7 @@ jobs:
        path: src/PartsUnlimitedWebsite/bin/
 
   terraform:
-    name: "Terraform"
+    name: "Terraform CD"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
